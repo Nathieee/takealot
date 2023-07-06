@@ -99,20 +99,21 @@ function ShopBody(){
 
       const filterAPI = APIitems.filter((data) => data.category === "Bivans_frontend");
 
-
-    const getItem =() => {
+      const getItem =(category) => {
         fetch(`http://159.65.21.42:9000/products`)
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            setAPIItems(data);
+            const filterAPI = data.filter((data) => data.category === category);            
+            setAPIItems(filterAPI);
+            console.log(filterAPI);
         })
         .catch((err) => console.log(err))
     }
 
 
     useEffect(() => {
-        getItem();
+        getItem("Bivans_frontend");
     }, [])
 
 
@@ -219,20 +220,20 @@ function ShopBody(){
                         <div className="bottom_links">  
                             <div className="shop_link_arrows" onClick={scrollLeft}><IoArrowBack /></div>
                             <div className="box_wrapper" ref={scrollContainerRef}>
-                                {filterAPI.map((item, _id) => (
-                                    <Link to={`/product/${item._id}`} className="link-to shop_box_links" key={_id}>
-                                    <div className="links_box">
-                                        <div className="link_pic">
-                                            <img src={item.image} alt="" />
+                                {filterAPI.map((item, id) => (
+                                    <Link to={`/product/${item.category}/${item._id}`} className="link-to shop_box_links" key={id}>
+                                        <div className="links_box">
+                                            <div className="link_pic">
+                                                <img src={item.image} alt="" />
+                                            </div>
+                                            <p>{item.description}</p>
+                                            <h4>R {item.price}</h4>
+                                            <div className="rating">
+                                                <h5>⭐ 4.8</h5>
+                                                <h5 className="reviews">({item.quantity} available)</h5>
+                                            </div>
                                         </div>
-                                        <p>{item.description}</p>
-                                        <h4>R {item.price}</h4>
-                                        <div className="rating">
-                                            <h5>⭐ 4.8</h5>
-                                            <h5 className="reviews">({item.quantity} available)</h5>
-                                        </div>
-                                    </div>
-                                </Link>
+                                    </Link>
                                 ))}                                
                             </div>     
                             <div className="shop_link_arrows" onClick={scrollRight}><IoArrowForward /></div>                                              

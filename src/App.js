@@ -13,13 +13,13 @@ function App(){
   return(
     <div>
       <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />}/>
-        <Route path='/shop' element={<ShopPage />}/>
-        <Route path='/product/:id' element={<ProductPage />}/>
-        <Route path='/cart' element={<CartPage />}/> 
-        <Route path='/register' element={<RegisterPage />}/>       
-        <Route path='/login' element={<LoginPage />}/>
+      <Routes path='/'>
+        <Route index element={<Home />}/>
+        <Route path='shop' element={<ShopPage />}/>
+        <Route path='product/:category/:id' element={<ProductPage />}/>
+        <Route path='cart' element={<CartPage />}/> 
+        <Route path='register' element={<RegisterPage />}/>       
+        <Route path='login' element={<LoginPage />}/>
 
         {/* <Route path='/contact' element={<Contact />}/>        
         <Route path='/user_details' element={<UserDetails />}/>

@@ -27,20 +27,15 @@ function ProductBody(){
     //     const location = useLocation();
     //   const { item } = location.state;
 
-    const { _id } = useParams();
-    console.log(_id)
+    const { id } = useParams();
     const [item, setItem] = useState({});
 
 
     const getProduct = (() => {
-        fetch(`http://159.65.21.42:9000/products/${_id}`)
-        .then((resp) => {
-            resp.json();
-            console.log(resp);
-        })
+        fetch(`http://159.65.21.42:9000/products`)
+        .then((resp) => resp.json())
         .then((data) => {
-            console.log(data);
-            setItem(data)
+            setItem(data.filter((item) => item._id === id)[0])
         })
     })
 
@@ -59,7 +54,7 @@ function ProductBody(){
                     </div>
                     <h5><IoShareSocial /> Share</h5>
                 </div>
-                    {item._id ? (
+                    {item._id && (
                         <div className="product_container">
                             <div className="left">
                                 <div className="part1">
@@ -423,9 +418,7 @@ function ProductBody(){
                                 </div>
                             </div>
                         </div>
-                    )
-                    : null
-                    }
+                    )}
                 <div className="related_products">
                     <div className="section">
                         <div className="top">
