@@ -5,19 +5,37 @@ import { IoLogoFacebook, IoLogoGoogle } from "react-icons/io5";
 
 function RegisterBody(){
 
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
+    const [fullname, setFullname] = useState("");    
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [err, setErr] = useState(false);
 
-    const submitFunc = (e) => {
+    const registerFunc = (e) => {
         e.preventDefault();
-        if (firstname === "" || lastname === "" || email ==="" || phone ==="" || password==="" ){
+        if (fullname === "" || email ==="" || phone ==="" || password===""){
             setErr(true);
             return;
         }
+
+        let User = {
+            name: fullname,
+            phone: phone,
+            email: email,
+            password: password,                
+          }
+          
+          fetch("http://159.65.21.42:9000/register", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(User),
+          })
+          .then((resp) => resp.json())
+          .then((data) => {
+            alert("New User Created");
+            console.log(data);            
+          })
+          .catch((err) => console.log(err));
     }
 
 
@@ -30,15 +48,11 @@ function RegisterBody(){
                     <button><IoLogoGoogle className="google_register_icon"/> Register with Google</button>
                     <button><IoLogoFacebook className="facebook_register_icon"/> Register with Facebook</button>
                 </div>
-                <form onSubmit={submitFunc}>
+                <form onSubmit={registerFunc}>
                     <div className="form_group">
-                        <input type="text" placeholder="First Name" value={firstname} onChange={(e) => setFirstname(e.target.value)}/>
-                        {err && firstname ==="" ? <span>First name Required</span> : null}
-                    </div>
-                    <div className="form_group">
-                        <input type="text" placeholder="Last Name" value={lastname} onChange={(e) => setLastname(e.target.value)}/>   
-                        {err && lastname ==="" ? <span>Last name Required</span> : null}
-                    </div>
+                        <input type="text" placeholder="Full Name" value={fullname} onChange={(e) => setFullname(e.target.value)}/>
+                        {err && fullname ==="" ? <span>Full name Required</span> : null}
+                    </div>                    
                     <div className="form_group">
                         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                         {err && email ==="" ? <span>Email Required</span> : null}

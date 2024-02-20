@@ -16,16 +16,19 @@ import sec2Img3 from "./images/orange-watch.jpeg";
 import ebucks from "./images/ebucks-logo-@3x.svg";
 import productpage_card from "./images/productpage_card.png";
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
+import { MarketContext } from "../Contexts/MarketContext";
+
 
 
 // import { useLocation } from "react-router-dom";
 
 
 function ProductBody(){
-    //     const location = useLocation();
-    //   const { item } = location.state;
+    
+    const contextData = useContext(MarketContext);
+    const {cart, setCart} = contextData;
 
     const { id } = useParams();
     const [item, setItem] = useState({});
@@ -42,6 +45,18 @@ function ProductBody(){
     useEffect(() => {
         getProduct();
     }, [])
+
+    const handle_add_to_cart = (item) => {
+        const existingCartItems = [...cart]
+        const isItem_inCart = existingCartItems.find((product) => product._id === item._id)
+        if(isItem_inCart) {
+            alert("Item has alredy been added");
+            return;
+        }
+        existingCartItems.push(item);
+        setCart(existingCartItems)
+        localStorage.setItem("Takealot", JSON.stringify(existingCartItems))
+    }
 
     return(
         <div className="productbody_bg">
@@ -95,7 +110,7 @@ function ProductBody(){
                                             </div>
                                         </div>
                                         <Link to="/cart">
-                                            <button>ADD TO CART</button>
+                                            <button onClick={() => handle_add_to_cart(item)}>ADD TO CART</button>
                                         </Link>
                                         <ul>
                                             <li>Free Delivery Available.</li>

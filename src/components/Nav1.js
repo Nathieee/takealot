@@ -4,6 +4,8 @@ import { IoCaretDownOutline, IoHeart, IoCart, IoMenu } from "react-icons/io5";
 
 function Nav_N_Banner() {
       
+    const cart = JSON.parse(localStorage.getItem('Takealot'));
+
     return(
         <div>
             <div className="navigation">
@@ -34,7 +36,7 @@ function Nav_N_Banner() {
                         </div>
                         <div className="cart">
                             <IoCart  className="cartIcon"/>
-                            <h4>0</h4>
+                            <h4>{cart.length}</h4>
                         </div>
                     </div>
                 </div>

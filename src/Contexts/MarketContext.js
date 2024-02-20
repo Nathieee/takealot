@@ -1,16 +1,16 @@
 import { useEffect, useState, createContext } from "react";
 
 
-export const FoodContext = createContext();
+export const MarketContext = createContext();
 
-function FoodProvider(props) {
+function MarketProvider(props) {
 
     // const contextData = useContext(FoodContext);
     // const {cart} = contextData;
 
     const [cart, setCart] = useState([]);
     console.log(cart)
-    let localStorageCart = JSON.parse(localStorage.getItem("Chop&Grill"));
+    let localStorageCart = JSON.parse(localStorage.getItem("Takealot"));
 
     useEffect(() => {
         if(localStorageCart){
@@ -19,10 +19,10 @@ function FoodProvider(props) {
     },[])
 
     return(
-        <FoodContext.Provider value={{cart, setCart}}>
+        <MarketContext.Provider value={{cart, setCart}}>
             {props.children}
-        </FoodContext.Provider>
+        </MarketContext.Provider>
     );
 }
 
-export default FoodProvider;
+export default MarketProvider;

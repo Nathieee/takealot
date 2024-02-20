@@ -1145,7 +1145,6 @@ body {
   align-items: center;
   justify-content: space-between;
   overflow-x: hidden !important;
-  /* background-color: aqua; */
 }
 .shopbody_content .shop_link_arrows{
   width: 20px;
@@ -1154,14 +1153,11 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  /* background-color: palevioletred; */
 }
 .shopbody_content .box_wrapper{
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
-  /* background-color: red; */
   overflow-x: auto !important;
 }
 .shop_box_links{
@@ -1170,20 +1166,16 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0px 20px;
-  /* align-items: center; */
   justify-content: space-between;
   background-color: rgb(244,244,244);
   transition: 0.5s ease-in;
   flex-shrink: 0;
-  /* overflow-x: auto; */
-  /* background-color: yellow; */
 }
 .shopbody_content .links_box{
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* margin: 0px 15px 0 0; */
   justify-content: space-between;
   background-color: white;
   overflow-x: auto !important;
@@ -1930,19 +1922,22 @@ margin: 5px 0;
   flex-direction: column;
   /* justify-content: space-between; */
   align-items: end;
-  /* background-color: red; */
 }
 .cartpage_content .item .qty{  
   display: flex;
+  align-items: center;
   margin-top: 20px;
 }
-.cartpage_content .item input{
+.cartpage_content .qty h4{  
+  margin-left: 10px;
+}
+/* .cartpage_content .item input{
   width: 50px;
   padding: 5px 0;
   margin-left: 10px;
   border: none;
   border-bottom: 1px solid gainsboro;
-}
+} */
 .cartpage_content .delete_or_like{  
   display: flex;
   margin-top: 30px;
@@ -1958,6 +1953,12 @@ margin: 5px 0;
 }
 .cartpage_content .item button:hover{
   background-color: gainsboro;
+}
+.cartpage_content .qty button{  
+  width: 30px;
+  font-size: 18px;
+  padding: 2px 0; 
+  background-color: whitesmoke; 
 }
 
 
